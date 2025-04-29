@@ -7,12 +7,22 @@ const FileUpload = () => {
   const [result, setResult] = useState(null);
 
   const handleUpload = async () => {
-    const formData = new FormData();
-    formData.append('file', file);
-    const res = await axios.post(`https://research-backend-vw92.onrender.com/api/upload/${mode}`, formData);
-    setResult(res.data);
-    
+    try {
+      const formData = new FormData();
+      formData.append('file', file);
+  
+      const res = await axios.post(`http://localhost:3002/api/upload/${mode}`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      });
+      setResult(res.data);
+    } catch (error) {
+      console.error("Upload failed:", error);
+      alert("Upload failed. See console for details.");
+    }
   };
+  
 
   return (
     <div className="p-4">
