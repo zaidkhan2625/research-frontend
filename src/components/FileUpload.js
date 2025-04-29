@@ -11,11 +11,12 @@ const FileUpload = () => {
       const formData = new FormData();
       formData.append('file', file);
   
-      const res = await axios.post(`http://localhost:3002/api/upload/${mode}`, formData, {
+      const res = await axios.post(`https://research-backend-1.onrender.com/api/upload/${mode}`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
       });
+      
       setResult(res.data);
     } catch (error) {
       console.error("Upload failed:", error);
